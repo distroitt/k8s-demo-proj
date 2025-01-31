@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfiMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    server {
+        listen 80;
+        server_name localhost;
+
+        location / {
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+    }
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to Nginx on Kubernetes</title>
+        <style>
+            body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+            h1 { color: #2d89ef; }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to Nginx on Kubernetes!</h1>
+        <p>This Nginx server is running inside a Kubernetes cluster.</p>
+    </body>
+</html>
