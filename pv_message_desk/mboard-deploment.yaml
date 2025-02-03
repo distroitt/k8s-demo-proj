@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: message-board
+  labels:
+    app: message-board
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: message-board
+  template:
+    metadata:
+      labels:
+        app: message-board
+    spec:
+      containers:
+      - name: message-board
+        image: distroit/flask_redis
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - mountPath: "/data"
+          name: message-data
+      volumes:
+      - name: message-data
+        persistentVolumeClaim:
+          claimName: message-board-pvc
