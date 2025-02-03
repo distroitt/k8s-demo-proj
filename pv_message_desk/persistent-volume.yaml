@@ -8,4 +8,4 @@ spec:
   accessMode:
     - ReadWriteOnce
   hostPath:
-    path: "data/"
+    path: "/tmp/storage"
