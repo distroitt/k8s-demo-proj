@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: message-board
-        image: distroit/flask_redis
+        image: distroit/message_desk
         ports:
         - containerPort: 5000
         volumeMounts:
