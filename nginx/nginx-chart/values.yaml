@@ -1,0 +1,64 @@
+replicaCount: 2
+
+deployment:
+  containers:
+    nginx:
+      image: nginx:1.21
+      ports:
+      - containerPort: 80
+      volumeMounts:
+      - name: config-volume
+        mountPath: /etc/nginx/nginx.conf
+        subPath: nginx.conf
+      - name: html-volume
+        mountPath: /usr/share/nginx/html/index.html
+        subPath: index.html
+  volumes:
+    config-volume:
+      configMap:
+        name: nginx-config
+    html-volume:
+      configMap:
+        name: nginx-config
+
+service:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30001
+  
+configMap:
+  nginx.conf: |
+    events {
+    worker_connections 1024;
+    }
+
+    http {
+        server {
+            listen 80;
+            server_name localhost;
+
+            location / {
+                root /usr/share/nginx/html;
+                index index.html;
+            }
+        }
+    }
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to Nginx on Kubernetes</title>
+        <style>
+            body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+            h1 { color: #2d89ef; }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to Nginx on Kubernetes!</h1>
+        <p>This Nginx server is running inside a Kubernetes cluster.</p>
+    </body>
+    </html>

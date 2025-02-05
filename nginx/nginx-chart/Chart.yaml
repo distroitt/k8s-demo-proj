@@ -1,0 +1,8 @@
+apiVersion: v2
+name: nginx
+description: 
+  A Helm Chart for K8s.
+  Demonstrates nginx deployment and makes it accessible.
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
