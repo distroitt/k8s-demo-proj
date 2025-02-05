@@ -1,0 +1,39 @@
+{{- if .Values.deployment.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        {{- range $name, $container := .Values.deployment.containers }}
+          - name: {{ $name }}
+            image: {{ $container.image }}
+            ports:
+              {{- with $container.ports }}
+                {{- toYaml . | nindent 12 }}
+              {{- end }}
+            volumeMounts:
+            {{- with $container.volumeMounts }}
+              {{- toYaml . | nindent 12}}
+            {{- end }}
+        {{- end }}
+      volumes:
+        {{- range $name, $volume := .Values.deployment.volumes }}
+          - name: {{ $name }}
+            {{- with $volume.persistentVolumeClaim }}
+            persistentVolumeClaim:
+              claimName: {{ .claimName }}
+            {{- end }}
+        {{- end }}
+{{- end }}

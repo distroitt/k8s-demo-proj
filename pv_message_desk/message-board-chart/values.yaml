@@ -1,0 +1,41 @@
+replicaCount: 1
+
+deployment:
+  enabled: true
+  containers:
+    message-board:
+      image: distroit/message_desk
+      ports:
+        - containerPort: 5000
+      volumeMounts:
+        - mountPath: "/data"
+          name: message-data
+  volumes:
+    message-data:
+      persistentVolumeClaim:
+        claimName: message-board-pvc
+
+service:
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+    nodePort: 30001
+
+persistentvolume:
+  spec:
+    capacity:
+      storage: 1Gi
+    accessModes:
+      - ReadWriteOnce
+    hostPath:
+      path: "/tmp/storage"
+
+persistentvolumeclaim:
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 500Mi

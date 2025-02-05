@@ -1,0 +1,8 @@
+apiVersion: v2
+name: message-board
+description: 
+  A Helm chart for Kubernetes. 
+  Deploys a message board that allows you to write and receive messages
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
