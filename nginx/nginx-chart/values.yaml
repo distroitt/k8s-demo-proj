@@ -58,7 +58,7 @@ configMap:
         </style>
     </head>
     <body>
-        <h1>Welcome to Nginx on Kubernetes!</h1>
+        <h1>Welcome to ZZZZNginx on Kubernetes!</h1>
         <p>This Nginx server is running inside a Kubernetes cluster.</p>
     </body>
     </html>
