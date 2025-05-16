@@ -58,7 +58,7 @@ configMap:
         </style>
     </head>
     <body>
-        <h1>ЗНАЙ </h1>
+        <h1>БАРСЕЛОНА БАРСА БАРСА БАРСА </h1>
         <p>This Nginx server is running inside a Kubernetes cluster.</p>
     </body>
     </html>
