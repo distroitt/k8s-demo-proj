@@ -16,10 +16,10 @@ deployment:
   volumes:
     config-volume:
       configMap:
-        name: nginx-config
+        name: nginxconfig
     html-volume:
       configMap:
-        name: nginx-config
+        name: nginxconfig
 
 service:
   type: NodePort
